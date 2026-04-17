@@ -4,10 +4,18 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public float jumpSpeed;
-    public Sprite normalSprite, invertedSprite;
-    public bool isInverted;
 
     private Rigidbody2D rb;
+    public bool isGrounded;
+    float axis;
+
+
+    public Transform groundCheck;
+    public float groundRadius;
+    public LayerMask groundLayer;
+
+    public float gravityAxis;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,21 +24,59 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(axis == 1f)
         {
-            
+            transform.localScale = new Vector3(1, transform.localScale.y);
+        }
+        else if (axis == -1f)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space) &&isGrounded)
+        {
+            rb.linearVelocityY = jumpSpeed;
+        }
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+
+        if(rb.linearVelocityY > 0f)
+        {
+            rb.gravityScale = 2f * gravityAxis;
+        }
+        else
+        {
+            rb.gravityScale = 4f * gravityAxis;
+        }
+
+        if (isGrounded)
+        {
+            rb.linearDamping = 1f;
+        }
+        else
+        {
+            rb.linearDamping = 0f;
         }
     }
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            
+            rb.linearVelocityX = speed;
+            axis = 1;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-
+            rb.linearVelocityX = -speed;
+            axis = -1f;
+        }
+        else
+        {
+            rb.linearVelocityX = 0f;
         }
         
     }
+
+
 }
