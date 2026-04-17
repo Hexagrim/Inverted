@@ -40,9 +40,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: InvertedGround
     uniqueID: 345094633
     locked: 0
@@ -54,6 +51,9 @@ TagManager:
     locked: 0
   - name: InvertedPlayer
     uniqueID: 2600464725
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   m_RenderingLayers:
   - Default
