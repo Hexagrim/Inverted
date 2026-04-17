@@ -16,9 +16,12 @@ public class Player : MonoBehaviour
 
     public float gravityAxis;
 
+    private Animator Anim;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&isGrounded)
         {
             rb.linearVelocityY = jumpSpeed * gravityAxis;
+            Anim.SetTrigger("takeoff");
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
@@ -71,6 +75,15 @@ public class Player : MonoBehaviour
         {
             rb.linearDamping = 0f;
         }
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            Anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            Anim.SetBool("isRunning", false);
+        }
+        Anim.SetBool("isJumping", !isGrounded);
     }
     private void FixedUpdate()
     {
