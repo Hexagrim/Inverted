@@ -12,6 +12,8 @@ public class InvertAbility : MonoBehaviour
     public Transform groundCheck;
     public float groundRadius;
     public LayerMask normalGroundLayer,invertedGroundLayer;
+
+    public Transform DEBUG_POINT;
     void Start()
     {
         
@@ -20,13 +22,31 @@ public class InvertAbility : MonoBehaviour
 
     void Update()
     {
-        bool NormalGroundTouch  = Physics2D.OverlapCircle(groundCheck.position, groundRadius, normalGroundLayer);
-        bool InvertGroundTouch  = Physics2D.OverlapCircle(groundCheck.position, groundRadius, invertedGroundLayer);
+        Collider2D hitGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, normalGroundLayer);
+        Collider2D hitInvert  = Physics2D.OverlapCircle(groundCheck.position, groundRadius, invertedGroundLayer);
 
+        if (!inverted)
+        {
+            DEBUG_POINT.position = transform.position - Vector3.up * 0.55f;
+        }
+        else
+        {
+            DEBUG_POINT.position = transform.position - Vector3.up * -0.55f;
 
-        if (Input.GetKeyDown(KeyCode.E) &&( NormalGroundTouch || InvertGroundTouch))
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) &&( hitGround || hitInvert))
         {
             inverted = !inverted;
+            GetComponent<Rigidbody2D>().linearVelocityY = 0f;
+            if (inverted)
+            {
+                transform.position -= Vector3.up * 0.55f;
+            }
+            else
+            {
+                transform.position -= Vector3.up * -0.55f;
+            }
         }
 
         if (inverted)
@@ -36,6 +56,7 @@ public class InvertAbility : MonoBehaviour
             invertedSprite.SetActive(true);
             normalGround.enabled = false;
             invertedGround.enabled = true;
+            transform.localScale = new Vector2(transform.localScale.x, -1f);
         }
         else
         {
@@ -44,6 +65,7 @@ public class InvertAbility : MonoBehaviour
             invertedGround.enabled = false;
             normalSprite.SetActive(true);
             invertedSprite.SetActive(false);
+            transform.localScale = new Vector2(transform.localScale.x, 1f);
         }
     }
 }

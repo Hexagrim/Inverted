@@ -36,20 +36,33 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) &&isGrounded)
         {
-            rb.linearVelocityY = jumpSpeed;
+            rb.linearVelocityY = jumpSpeed * gravityAxis;
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if(rb.linearVelocityY > 0f)
+        if (gravityAxis == 1)
         {
-            rb.gravityScale = 2f * gravityAxis;
+            if (rb.linearVelocityY > 0f)
+            {
+                rb.gravityScale = 2f;
+            }
+            else
+            {
+                rb.gravityScale = 4f;
+            }
         }
         else
         {
-            rb.gravityScale = 4f * gravityAxis;
+            if (rb.linearVelocityY < 0f)
+            {
+                rb.gravityScale = -2f;
+            }
+            else
+            {
+                rb.gravityScale = -4f;
+            }
         }
-
         if (isGrounded)
         {
             rb.linearDamping = 1f;
