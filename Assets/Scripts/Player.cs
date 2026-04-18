@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&isGrounded)
         {
             rb.linearVelocityY = jumpSpeed * gravityAxis;
+            FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().Jump);
             Anim.SetTrigger("takeoff");
         }
 

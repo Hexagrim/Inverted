@@ -6,8 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5625c4ee72b38e14dba796e9796e3f3d
+  - enabled: 1
     path: Assets/Scenes/1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/2.unity
+    guid: 5bd20bd1946ff064a9bd319ec43d874c
+  - enabled: 1
+    path: Assets/Scenes/3.unity
+    guid: 5d4b9e06ed796924c88965c098f22d6b
+  - enabled: 1
+    path: Assets/Scenes/4.unity
+    guid: 0a06f85c257db424e928943b49375380
+  - enabled: 1
+    path: Assets/Scenes/5.unity
+    guid: 549efd65df744be46aae616520aea372
+  - enabled: 1
+    path: Assets/Scenes/6.unity
+    guid: b2a04980178491a4b8529381d1e414d0
+  - enabled: 1
+    path: Assets/Scenes/7.unity
+    guid: d49f1433109a3ba448b2628e13401281
+  - enabled: 1
+    path: Assets/Scenes/8.unity
+    guid: ef454ccc9fa8243489bd19abada33145
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

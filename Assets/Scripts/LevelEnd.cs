@@ -22,6 +22,7 @@ public class LevelEnd : MonoBehaviour
     IEnumerator StartTransition()
     {
         PlayerT.GetComponent<Player>().enabled = false;
+        FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().End);
         PlayerT.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine(LerpToPosition(transform.position, 0.1f));
         T_Anim.SetTrigger("fade");

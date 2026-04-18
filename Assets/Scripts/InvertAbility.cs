@@ -38,6 +38,7 @@ public class InvertAbility : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) &&( hitGround || hitInvert))
         {
             inverted = !inverted;
+            FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().Flip);
             GetComponent<Rigidbody2D>().linearVelocityY = 0f;
             if (inverted)
             {

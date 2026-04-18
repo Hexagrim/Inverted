@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
     void Collect()
     {
         colM.totalCollectables++;
+        FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().Collect);
         Instantiate(collectParticles, transform.position, Quaternion.identity);
         collected = true;
         Destroy(gameObject);
