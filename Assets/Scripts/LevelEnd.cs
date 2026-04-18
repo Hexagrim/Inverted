@@ -7,6 +7,9 @@ public class LevelEnd : MonoBehaviour
 {
     public string NextLevelName;
     public Transform PlayerT;
+    public Animator T_Anim;
+
+    public GameObject Particel;// yes particel not particle, you dumb ahh.
     void Start()
     {
         
@@ -14,13 +17,14 @@ public class LevelEnd : MonoBehaviour
 
     void Update()
     {
-        
+        Particel.SetActive(FindFirstObjectByType<CollectablesManager>().CanPass());
     }
     IEnumerator StartTransition()
     {
         PlayerT.GetComponent<Player>().enabled = false;
         PlayerT.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine(LerpToPosition(transform.position, 0.1f));
+        T_Anim.SetTrigger("fade");
         yield return new WaitForSeconds(0.25f);
         SceneManager.LoadSceneAsync(NextLevelName);
     }
@@ -28,7 +32,10 @@ public class LevelEnd : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(StartTransition());
+            if (FindFirstObjectByType<CollectablesManager>().CanPass())
+            {
+                StartCoroutine(StartTransition());
+            }
         }
     }
     public IEnumerator LerpToPosition(Vector3 targetPos, float duration)
