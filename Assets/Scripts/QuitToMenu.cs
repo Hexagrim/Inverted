@@ -18,11 +18,22 @@ public class QuitToMenu : MonoBehaviour
         {
             StartCoroutine(TransitionScene());
         }//yes why you red thios?>
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ResetScene());
+        }
     }
     IEnumerator TransitionScene()
     {
         Anim.SetTrigger("fade");
         yield return new WaitForSeconds(0.24f);
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+    public IEnumerator ResetScene()
+    {
+        Anim.SetTrigger("fade");
+        yield return new WaitForSeconds(0.24f);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }
