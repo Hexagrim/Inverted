@@ -22,7 +22,7 @@ Since this is a concept and i got too tired to make levels, only 11 super easy a
 . Libresprite \
 . Unity 6 \
 . Flstuido *<_Note i only used it to bitcrush a premade sound track_> \
-.__Milk__ 
+. __Milk__ 
 
 ***
 ## Have fun and enjoy thiss
